@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Front-End Developer Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+    }
+    .nav-link:hover {
+      color: #10b981;
+    }
+    .section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .project-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
+    }
+    .skill-progress {
+      background: linear-gradient(90deg, #10b981, #34d399);
+    }
+    .id-card-container {
+      position: relative;
+      margin: 0 auto;
+    }
+    .id-card-wrapper {
+      animation: swing 5s ease-in-out infinite;
+    }
+    .id-card-rope {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      width: 4px;
+      height: 40px;
+      background-color: #10b981;
+      transform: translateX(-50%);
+    }
+    @keyframes swing {
+      0%, 100% { transform: rotate(5deg); }
+      50% { transform: rotate(-5deg); }
+    }
+    .project-scroll-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #10b981 #4a4a4a;
+    }
+    .project-scroll-container::-webkit-scrollbar {
+      height: 8px;
+    }
+    .project-scroll-container::-webkit-scrollbar-track {
+      background: #4a4a4a;
+    }
+    .project-scroll-container::-webkit-scrollbar-thumb {
+      background: #10b981;
+      border-radius: 4px;
+    }
+    .project-card {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      min-width: 280px;
+      max-width: 320px;
+      margin-right: 1rem;
+    }
+    .modal-image-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #10b981 #4a4a4a;
+    }
+    .modal-image-container::-webkit-scrollbar {
+      height: 8px;
+    }
+    .modal-image-container::-webkit-scrollbar-track {
+      background: #4a4a4a;
+    }
+    .modal-image-container::-webkit-scrollbar-thumb {
+      background: #10b981;
+      border-radius: 4px;
+    }
+    .modal-image-container img {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      min-width: 280px;
+      max-width: 320px;
+      margin-right: 1rem;
+    }
+    @media (min-width: 640px) {
+      .project-scroll-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        overflow-x: visible;
+      }
+      .project-card {
+        min-width: 0;
+        max-width: none;
+        margin-right: 0;
+      }
+      .modal-image-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        overflow-x: visible;
+      }
+      .modal-image-container img {
+        min-width: 0;
+        max-width: none;
+        margin-right: 0;
+      }
+    }
+    @media (max-width: 640px) {
+      .id-card-container {
+        margin-top: 2rem;
+      }
+      .id-card-wrapper img {
+        max-width: 200px;
+      }
+      .section {
+        padding: 1rem;
+      }
+      .project-card img {
+        height: 160px;
+      }
+      .modal-content {
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+    }
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .id-card-wrapper img {
+        max-width: 250px;
+      }
+      .project-card img {
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-gray-900 bg-opacity-90 shadow-lg z-50">
+    <div class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <div class="text-xl sm:text-2xl font-bold text-emerald-500">Portfolio</div>
+      <div class="space-x-4 sm:space-x-6">
+        <a href="#home" class="nav-link text-gray-300 hover:text-emerald-500 transition duration-300 text-sm sm:text-base">Home</a>
+        <a href="#about" class="nav-link text-gray-300 hover:text-emerald-500 transition duration-300 text-sm sm:text-base">About</a>
+        <a href="#projects" class="nav-link text-gray-300 hover:text-emerald-500 transition duration-300 text-sm sm:text-base">Projects</a>
+        <a href="#skills" class="nav-link text-gray-300 hover:text-emerald-500 transition duration-300 text-sm sm:text-base">Skills</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home" class="section bg-gray-900">
+    <div class="container mx-auto px-4 sm:px-6 text-center flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-8">
+      <div class="md:w-1/2">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-emerald-500 mb-4">Hi, I'm Fulgentius Yovandi</h1>
+        <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-6">Front-End Developer</p>
+        <a href="#projects" class="inline-block bg-emerald-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:bg-emerald-600 transition duration-300 text-sm sm:text-base">View My Work</a>
+      </div>
+      <div class="md:w-1/2 flex justify-center id-card-container">
+        <div class="relative id-card-wrapper">
+          <div class="id-card-rope"></div>
+          <img src="img/almet.jpg" alt="ID Card" class="w-full max-w-[200px] sm:max-w-[250px] md:maxsome code here max-w-xs h-auto rounded-lg shadow-lg">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section bg-gray-800">
+    <div class="container mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-emerald-500 mb-8 md:mb-10">About Me</h2>
+      <div class="flex flex-col md:flex-row items-center gap-6 sm:gap-10">
+        <div class="md:w-1/2 flex justify-center">
+          <img src="img/fotoyopan.jpg" alt="Profile" class="w-full max-w-[200px] sm:max-w-[250px] md:max-w-xs h-auto rounded-lg shadow-lg">
+        </div>
+        <div class="md:w-1/2">
+          <p class="text-base sm:text-lg text-gray-300 mb-4">
+            Saya adalah mahasiswa semester 6 di Universitas Duta Bangsa yang memiliki ketertarikan dan keahlian di bidang pengembangan web. Selain menjalani perkuliahan, saya juga aktif sebagai joki tugas dan telah mengerjakan berbagai proyek website sesuai kebutuhan klien. Saya menguasai HTML, CSS, dan PHP Laravel, serta terbiasa menyelesaikan proyek dengan efisien dan tepat waktu.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section bg-gray-900">
+    <div class="container mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-emerald-500 mb-8 md:mb-10">My Projects</h2>
+      <div class="project-scroll-container snapLotOfCodeHere snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <!-- Project 1 -->
+        <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+          <img src="img/webiste wisata.png" alt="Wisata Religi" class="w-full h-40 sm:h-48 object-cover">
+          <div class="p-4 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-semibold text-emerald-500 mb-2">Company Profile Website - Wisata Karanganyar</h3>
+            <p class="text-sm sm:text-base text-gray-300 mb-4">
+              Website Wisata Karanganyar menampilkan tempat-tempat wisata di Karanganyar dan deskripsi dari tempat wisata tersebut. Website ini bisa menampilkan maps dari tempat wisata dan dibuat responsif dan elegan, menggunakan HTML, CSS, JavaScript.
+            </p>
+            <a href="https://wisata-religi-karanganyar.netlify.app" class="text-emerald-500 hover:underline text-sm sm:text-base">View Project</a>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+          <img src="img/webiste spp.png" alt="Pembayaran SPP" class="w-full h-40 sm:h-48 object-cover">
+          <div class="p-4 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-semibold text-emerald-500 mb-2">Website Pembayaran SPP</h3>
+            <p class="text-sm sm:text-base text-gray-300 mb-4">
+              Website SPP ini dibangun menggunakan framework PHP Laravel dan dirancang untuk memudahkan proses pembayaran SPP siswa secara online. Sistem ini dilengkapi dengan fitur rekap laporan yang dapat diakses oleh admin untuk memantau pembayaran secara real-time.
+            </p>
+            <a href="http://tkabakradenan.com/" class="text-emerald-500 hover:underline text-sm sm:text-base">View Project</a>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+          <img src="img/login web_LKS.png" alt="Website Kedinasan" class="w-full h-40 sm:h-48 object-cover">
+          <div class="p-4 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-semibold text-emerald-500 mb-2">Website Kedinasan</h3>
+            <p class="text-sm sm:text-base text-gray-300 mb-4">
+              Website Kedinasan ini dibuat menggunakan PHP Native untuk mengelola pengajuan dan penerbitan surat izin secara digital. Sistem mendukung empat jenis pengguna: Admin, Petugas, Kepala Dinas, dan Warga, dengan fungsi masing-masing mulai dari pengajuan hingga persetujuan.
+            </p>
+            <button onclick="document.getElementById('modal-kedinasan').classList.remove('hidden')" class="text-emerald-500 hover:underline text-sm sm:text-base">View Project</button>
+          </div>
+        </div>
+        <!-- Project 4 -->
+        <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+          <img src="img/simpeg_login.png" alt="Website SIMPEG" class="w-full h-40 sm:h-48 object-cover">
+          <div class="p-4 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-semibold text-emerald-500 mb-2">Website SIMPEG</h3>
+            <p class="text-sm sm:text-base text-gray-300 mb-4">
+              Website SIMPEG ini dibuat dengan PHP Laravel dan menggunakan template AdminLTE. Terdapat tiga pengguna: Guru, Admin, dan Kepala Sekolah untuk mengelola permohonan kepegawaian secara digital.
+            </p>
+            <button onclick="document.getElementById('modal-simpeg').classList.remove('hidden')" class="text-emerald-500 hover:underline text-sm sm:text-base">View Project</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal for Project 3 -->
+  <div id="modal-kedinasan" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 hidden">
+    <div class="bg-white rounded-lg overflow-hidden w-full max-w-[90%] sm:max-w-4xl p-4 relative modal-content">
+      <button onclick="document.getElementById('modal-kedinasan').classList.add('hidden')" class="absolute top-2 right-2 text-gray-700 hover:text-red-500 text-xl font-bold">×</button>
+      <h2 class="text-lg sm:text-xl font-semibold text-gray-800 mb-4">Gambar Proyek Kedinasan</h2>
+      <div class="modal-image-container snap-x snap-mandatory">
+        <img src="img/login web_LKS.png" alt="Login Page" class="rounded-lg w-full h-auto">
+        <img src="img/lks admin.png" alt="Dashboard" class="rounded-lg w-full h-auto">
+        <img src="img/lks.kepaladinas.png" alt="Kepala Dinas" class="rounded-lg w-full h-auto">
+        <img src="img/lks.petugas.png" alt="Petugas" class="rounded-lg w-full h-auto">
+        <img src="img/user.png" alt="User" class="rounded-lg w-full h-auto">
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Project 4 -->
+  <div id="modal-simpeg" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 hidden">
+    <div class="bg-white rounded-lg overflow-hidden w-full max-w-[90%] sm:max-w-4xl p-4 relative modal-content">
+      <button onclick="document.getElementById('modal-simpeg').classList.add('hidden')" class="absolute top-2 right-2 text-gray-700 hover:text-red-500 text-xl font-bold">×</button>
+      <h2 class="text-lg sm:text-xl font-semibold text-gray-800 mb-4">Gambar Proyek SIMPEG</h2>
+      <div class="modal-image-container snap-x snap-mandatory">
+        <img src="img/simpeg_login.png" alt="Login Page" class="rounded-lg w-full h-auto">
+        <img src="img/simpeg_admin.png" alt="Admin" class="rounded-lg w-full h-auto">
+        <img src="img/simpeg_kepsek.png" alt="Kepala Sekolah" class="rounded-lg w-full h-auto">
+        <img src="img/simpeg_guru.png" alt="Guru" class="rounded-lg w-full h-auto">
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section bg-gray-800">
+    <div class="container mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-emerald-500 mb-8 md:mb-10">My Skills</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+        <div>
+          <div class="flex justify-between mb-2">
+            <span class="text-base sm:text-lg text-gray-300">HTML & CSS</span>
+            <span class="text-base sm:text-lg text-gray-300">90%</span>
+          </div>
+          <div class="w-full bg-gray-700 rounded-full h-2.5">
+            <div class="skill-progress h-2.5 rounded-full" style="width: 90%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-2">
+            <span class="text-base sm:text-lg text-gray-300">PHP Laravel</span>
+            <span class="text-base sm:text-lg text-gray-300">80%</span>
+          </div>
+          <div class="w-full bg-gray-700 rounded-full h-2.5">
+            <div class="skill-progress h-2.5 rounded-full" style="width: 80%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-2">
+            <span class="text-base sm:text-lg text-gray-300">Tailwind CSS</span>
+            <span class="text-base sm:text-lg text-gray-300">20%</span>
+          </div>
+          <div class="w-full bg-gray-700 rounded-full h-2.5">
+            <div class="skill-progress h-2.5 rounded-full" style="width: 20%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 py-6 text-center">
+    <p class="text-gray-300 text-sm sm:text-base">© 2025 Fulgentius Yovandi. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
